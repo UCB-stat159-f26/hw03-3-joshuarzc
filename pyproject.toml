@@ -1,22 +1,35 @@
-# Build backend configuration
 [build-system]
-# requires = ["..."]
-# build-backend = "..."
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
 
-# Package metadata and runtime dependencies
 [project]
-# name = "..."
-# version = "..."
-# description = "..."
-# readme = "README.md"
-# requires-python = "..."
-# authors = [{ name = "..." }]
-# dependencies = ["..."]
+name = "tennis-career"
+authors = [
+    { name = "Joshua Ren", email = "joshua_ren@berkeley.edu" }
+]
+version = "0.1.0"
+description = "Retrieve and plot tennis career match data from Tennis Abstract."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib>=3.7",
+    "pandas>=2.0",
+    "requests>=2.28",
+]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["tennis", "data", "visualization"]
 
-# Development-only dependencies
+
 [project.optional-dependencies]
-# test = ["..."]
+test = ["pytest>=7"]
 
-# Test discovery and options
+[project.urls]
+Homepage = "https://github.com/UCB-stat159-f26/hw03-3-joshuarzc"
+Issues = "https://github.com/UCB-stat159-f26/hw03-3-joshuarzc/issues"
+
+[tool.setuptools]
+packages = ["tennis_career"]
+
 [tool.pytest.ini_options]
-# testpaths = ["tests"]
+testpaths = ["tests"]
