@@ -1,1 +1,22 @@
+# Build backend configuration
+[build-system]
+# requires = ["..."]
+# build-backend = "..."
 
+# Package metadata and runtime dependencies
+[project]
+# name = "..."
+# version = "..."
+# description = "..."
+# readme = "README.md"
+# requires-python = "..."
+# authors = [{ name = "..." }]
+# dependencies = ["..."]
+
+# Development-only dependencies
+[project.optional-dependencies]
+# test = ["..."]
+
+# Test discovery and options
+[tool.pytest.ini_options]
+# testpaths = ["tests"]
