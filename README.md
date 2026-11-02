@@ -6,18 +6,51 @@
 
 ## Installation
 
+The package requires Python 3.10 or later. Install it from GitHub with:
+
+```bash
+pip install git+https://github.com/UCB-stat159-f26/hw03-3-joshuarzc.git
+```
+
 ## Usage
 
 ### Get career-match data
 
+`get_career_matches()` retrieves a player's career records and returns one clean row per match. The result includes `match_date`, `tournament`, `surface`, `result`, `opponent`, `player_age`, `opponent_age`, and `age_difference`.
+
+```python
+from tennis_career import get_career_matches
+
+matches = get_career_matches("Serena Williams")
+print(matches.head())
+```
+
 ### Create a career-match plot
+
+`plot_career_matches()` takes the clean data frame returned by `get_career_matches()` and returns a Matplotlib figure. Match results are colored by outcome.
+
+```python
+from tennis_career import plot_career_matches
+
+figure = plot_career_matches(matches)
+figure.savefig("serena-career.png", dpi=150)
+```
 
 ## Data source
 
-Match records are retrieved at runtime from [Tennis Abstract](https://www.tennisabstract.com/) career JavaScript files. The standardized output contains the match date, tournament, surface, result, opponent, player age, opponent age, and age difference.
+Match records and player metadata are retrieved at runtime from [Tennis Abstract](https://www.tennisabstract.com/) JavaScript files. The package does not redistribute raw match data. Female career files record opponents' dates of birth, from which opponent ages are calculated using match dates. Male career files provide opponent ages directly.
 
-Female career files record opponents' dates of birth, from which opponent ages are calculated using match dates. Male career files provide opponent ages directly. Data coverage and availability remain determined by Tennis Abstract.
+## Development and testing
 
-## Development
+To verify the package and work on its development, install the test dependency and run the suite from the project root:
 
-### Run tests
+```bash
+pip install -e ".[test]"
+python -m pytest
+```
+
+The tests use local mock data and do not access Tennis Abstract.
+
+## License
+
+This project is released under the [MIT License](LICENSE).
