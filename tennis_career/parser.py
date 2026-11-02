@@ -1,7 +1,7 @@
 import json
 
 
-def parse_career_js(js_text):
+def _parse_career_js(js_text):
     """
     Parse match records from a Tennis Abstract career JavaScript file.
 
