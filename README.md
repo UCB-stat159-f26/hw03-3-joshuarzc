@@ -36,6 +36,10 @@ figure = plot_career_matches(matches)
 figure.savefig("serena-career.png", dpi=150)
 ```
 
+![Career-match plot for Serena Williams](assets/serena-williams-career.png)
+
+*Career matches for Serena Williams, with points colored by match result.*
+
 ## Data source
 
 Match records and player metadata are retrieved at runtime from [Tennis Abstract](https://www.tennisabstract.com/) JavaScript files. The package does not redistribute raw match data. Female career files record opponents' dates of birth, from which opponent ages are calculated using match dates. Male career files provide opponent ages directly.
