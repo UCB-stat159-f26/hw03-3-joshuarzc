@@ -2,6 +2,7 @@ import requests
 
 
 CAREER_URL = "https://www.tennisabstract.com/jsmatches/{player_id}Career.js"
+PLAYER_METADATA_URL = "https://www.tennisabstract.com/jsmatches/{player_id}.js"
 
 
 def _normalize_player_name(player_name):
@@ -18,6 +19,11 @@ def _normalize_player_name(player_name):
 def _build_career_url(player_name):
     """Build the Tennis Abstract career JavaScript URL for a player."""
     return CAREER_URL.format(player_id=_normalize_player_name(player_name))
+
+
+def _build_player_metadata_url(player_name):
+    """Build the Tennis Abstract player metadata JavaScript URL."""
+    return PLAYER_METADATA_URL.format(player_id=_normalize_player_name(player_name))
 
 
 def _fetch_career_js(player_name):
@@ -47,4 +53,29 @@ def _fetch_career_js(player_name):
     if response.status_code != 200 or "var morematchmx =" not in response.text:
         raise ValueError(f"Could not retrieve career data for {player_name}.")
     
+    return response.text
+
+
+def _fetch_player_metadata(player_name):
+    """
+    Retrieve player metadata JavaScript text from Tennis Abstract.
+
+    Parameters:
+    player_name : A player name accepted by _normalize_player_name().
+
+    Returns:
+    Player metadata JavaScript text.
+
+    Raises:
+    ValueError: If the player cannot be found or metadata cannot be retrieved.
+    """
+    try:
+        response = requests.get(_build_player_metadata_url(player_name), timeout=10)
+    except requests.RequestException:
+        raise ValueError(f"Could not retrieve player metadata for {player_name}.")
+
+    if response.status_code == 404:
+        raise ValueError(f"Could not find player metadata for {player_name}.")
+    if response.status_code != 200:
+        raise ValueError(f"Could not retrieve player metadata for {player_name}.")
     return response.text
