@@ -1,6 +1,12 @@
 import pytest
 
-from tennis_career.client import _build_career_url, _fetch_career_js, _normalize_player_name
+from tennis_career.client import (
+    _build_career_url,
+    _build_player_metadata_url,
+    _fetch_career_js,
+    _fetch_player_metadata,
+    _normalize_player_name,
+)
 
 
 class MockResponse:
@@ -26,6 +32,12 @@ def test_build_career_url():
     assert _build_career_url("Serena Williams") == expected
 
 
+def test_build_player_metadata_url():
+    expected = "https://www.tennisabstract.com/jsmatches/SerenaWilliams.js"
+
+    assert _build_player_metadata_url("Serena Williams") == expected
+
+
 def test_fetch_career_js_returns_response_text(monkeypatch):
     text = "var morematchmx = [];"
 
@@ -47,3 +59,15 @@ def test_fetch_career_js_reports_unknown_player(monkeypatch):
 
     with pytest.raises(ValueError, match="Could not find career data for Gaston Sanchez"):
         _fetch_career_js("Gaston Sanchez")
+
+
+def test_fetch_player_metadata_returns_response_text(monkeypatch):
+    text = "var dob=19810926;"
+
+    def mock_get(url, timeout):
+        assert url == _build_player_metadata_url("Serena Williams")
+        return MockResponse(200, text)
+
+    monkeypatch.setattr("tennis_career.client.requests.get", mock_get)
+
+    assert _fetch_player_metadata("Serena Williams") == text
