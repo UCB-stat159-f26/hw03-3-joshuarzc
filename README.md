@@ -1,5 +1,7 @@
 # tennis-career
 
+[![Tests](https://github.com/UCB-stat159-f26/hw03-3-joshuarzc/actions/workflows/tests.yml/badge.svg)](https://github.com/UCB-stat159-f26/hw03-3-joshuarzc/actions/workflows/tests.yml)
+
 ## Overview
 
 `tennis-career` is a Python package for retrieving, cleaning, and visualizing professional tennis career-match data from Tennis Abstract. Given a player name, it resolves the corresponding career data, returns a standardized `pandas.DataFrame`, and produces a scatter plot of the player's age against the age difference with each opponent.
