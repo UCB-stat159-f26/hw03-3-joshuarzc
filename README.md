@@ -55,6 +55,14 @@ python -m pytest
 
 The tests use local mock data and do not access Tennis Abstract.
 
+## Reflections
+
+In this project, I realized that public interfaces are crucial for packages. I needed to decide which two functions a user should call, what each function should accept or return, and which retrieval and parsing steps should remain private. I also learned the concrete role of `pyproject.toml`, as it defines the package's dependencies and metadata, which are essential for making the code usable outside my own working directory.
+
+Moreover, I learned how to structure a Python package for reusability. For example, the same opponent field has different meanings in the two career-file formats. Female records store an eight-digit birth date, so the package calculates opponent age from the match date. Male records store opponent age directly, so the package uses the age directly.
+
+Furthermore, I learned how to handle online data sources. I used small local JavaScript test files, which made it possible to test the cleaning logic without relying on remote data during automated tests.
+
 ## License
 
 This project is released under the [MIT License](LICENSE).
